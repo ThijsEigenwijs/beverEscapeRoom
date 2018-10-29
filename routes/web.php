@@ -93,7 +93,7 @@ Route::get('/codes','HomeController@codes')->name('codes');
 
 Route::get('/reset','HomeController@reset')->name('reset');
 
-Route::post('/codesPost','HomeController@codesPost')->name('codesPost');
+Route::post('/codes','HomeController@codesPost')->name('codesPost');
 
 
 /* View Composer*/

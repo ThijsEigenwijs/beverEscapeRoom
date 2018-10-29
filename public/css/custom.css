@@ -31,7 +31,7 @@ body {
 
 .panel-heading{
     background-color: #00ea00 !important;
-    color: #eaeaea !important;
+    color: #1100ea !important;
 }
 
 .registration {
@@ -41,6 +41,14 @@ body {
 
 .logo-red {
     color: #ff0000 !important;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
 }
 
 

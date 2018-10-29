@@ -54,78 +54,36 @@
                     <!-- settings start -->
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-                            <i class="fa fa-tasks"></i>
-                            <span class="badge bg-theme">4</span>
+                            <i class="fa fa-user-lock"></i>
+                            <span class="badge bg-theme">{{\App\Codes::all()->where('solved',0)->count()}}</span>
                         </a>
-                        {{--<ul class="dropdown-menu extended tasks-bar">--}}
-                            {{--<div class="notify-arrow notify-arrow-green"></div>--}}
-                            {{--<li>--}}
-                                {{--<p class="green">You have 4 pending tasks</p>--}}
-                            {{--</li>--}}
-                            {{--<li>--}}
-                                {{--<a href="index.html#">--}}
-                                    {{--<div class="task-info">--}}
-                                        {{--<div class="desc">Doing stuff with the new panel</div>--}}
-                                        {{--<div class="percent">10%</div>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="progress progress-striped">--}}
-                                        {{--<div class="progress-bar progress-bar-success" role="progressbar"--}}
-                                             {{--aria-valuenow="10"--}}
-                                             {{--aria-valuemin="0" aria-valuemax="100" style="width: 10%">--}}
-                                            {{--<span class="sr-only">10% Complete (success)</span>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</a>--}}
-                            {{--</li>--}}
-                            {{--<li>--}}
-                                {{--<a href="index.html#">--}}
-                                    {{--<div class="task-info">--}}
-                                        {{--<div class="desc">Database Update</div>--}}
-                                        {{--<div class="percent">60%</div>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="progress progress-striped">--}}
-                                        {{--<div class="progress-bar progress-bar-warning" role="progressbar"--}}
-                                             {{--aria-valuenow="60"--}}
-                                             {{--aria-valuemin="0" aria-valuemax="100" style="width: 60%">--}}
-                                            {{--<span class="sr-only">60% Complete (warning)</span>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</a>--}}
-                            {{--</li>--}}
-                            {{--<li>--}}
-                                {{--<a href="index.html#">--}}
-                                    {{--<div class="task-info">--}}
-                                        {{--<div class="desc">Product Development</div>--}}
-                                        {{--<div class="percent">80%</div>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="progress progress-striped">--}}
-                                        {{--<div class="progress-bar progress-bar-info" role="progressbar"--}}
-                                             {{--aria-valuenow="80"--}}
-                                             {{--aria-valuemin="0" aria-valuemax="100" style="width: 80%">--}}
-                                            {{--<span class="sr-only">80% Complete</span>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</a>--}}
-                            {{--</li>--}}
-                            {{--<li>--}}
-                                {{--<a href="index.html#">--}}
-                                    {{--<div class="task-info">--}}
-                                        {{--<div class="desc">Payments Sent</div>--}}
-                                        {{--<div class="percent">70%</div>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="progress progress-striped">--}}
-                                        {{--<div class="progress-bar progress-bar-danger" role="progressbar"--}}
-                                             {{--aria-valuenow="70"--}}
-                                             {{--aria-valuemin="0" aria-valuemax="100" style="width: 70%">--}}
-                                            {{--<span class="sr-only">70% Complete (Important)</span>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</a>--}}
-                            {{--</li>--}}
-                            {{--<li class="external">--}}
-                                {{--<a href="#">See All Tasks</a>--}}
-                            {{--</li>--}}
-                        {{--</ul>--}}
+
+                        <ul class="dropdown-menu extended tasks-bar">
+                            <div class="notify-arrow notify-arrow-green innovum-orange-bg"></div>
+                            <li>
+                                <p class="green">Nog {{\App\Codes::all()->where('solved',0)->count()}} onopgeloste
+                                    puzzels!</p>
+                            </li>
+
+                            @foreach(\App\Codes::all() as $code)
+                                @if($code->solved == false)
+                                    <li>
+                                        <a href="index.html#">
+                                            <div class="task-info">
+                                                <div class="desc">Puzzel {{$code->id}}</div>
+                                            </div>
+                                            <div>
+                                                {{$code->hint}}
+                                            </div>
+                                        </a>
+                                    </li>
+                                @endif
+                            @endforeach
+
+                            <li class="external">
+                                <a href="{{route('codes')}}">See All Tasks</a>
+                            </li>
+                        </ul>
                     </li>
                     <!-- settings end -->
                 </ul>
@@ -156,15 +114,21 @@
 
                     <li>
                         <a href="{{route('codes')}}">
-                            <i class="fas fa-tachometer-alt"></i>
-                            <span>OntgrendelPagina</span>
+                            <i class="fas fa-lock"></i>
+                            <span>Oplossingen</span>
                         </a>
                     </li>
 
                     <li>
                         <a href="{{route('hints')}}">
-                            <i class="fas fa-tachometer-alt"></i>
+                            <i class="fas fa-question"></i>
                             <span>Hints</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a data-toggle="modal" data-target="#about">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>About</span>
                         </a>
                     </li>
 
@@ -213,6 +177,8 @@
                 <!-- sidebar menu end-->
             </div>
         </aside>
+
+
 @endif
 <!--sidebar end-->
     <!-- **********************************************************************************************************************************************************
@@ -221,6 +187,30 @@
     <!--main content start-->
     <section id="main-content">
         @yield('content');
+
+        <div class="modal fade" id="about" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">About</h4>
+                    </div>
+                    <div class="modal-body">
+                        Het spel is verzonnen door: Stan Tops<br>
+                        De website is ontwikkeld door: Thijs Tops<br>
+                        Thijs Tops (c) 2018
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Oké</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </section>
     <!-- /MAIN CONTENT -->
     <!--main content end-->

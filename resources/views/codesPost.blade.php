@@ -7,6 +7,7 @@
             <br><br>
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
+
                     <div class="panel panel-default">
                         <div class="panel-heading">Dashboard</div>
 
@@ -51,9 +52,9 @@
                                             <td>{{$code->id}}</td>
                                             <td>
                                                 @if($code->solved == true)
-                                                    <button type="button" class="btn btn-round btn-success">V</button>
+                                                    <button type="button" class="btn btn-round btn-success" disabled>V</button>
                                                 @else
-                                                    <button type="button" class="btn btn-round btn-danger">X</button>
+                                                    <button type="button" class="btn btn-round btn-danger" disabled>X</button>
                                                 @endif
                                             </td>
                                             <td><input type="text" id="{{$code->id}}" name="{{$code->id}}"
