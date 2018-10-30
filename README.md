@@ -29,4 +29,22 @@ Now you are done.
 ` php artisan serve ` and open the project on the browser. 
 
 
+## Default settings
+Admin account:<br>
+email: admin@local.host<br>
+password: geheim
+<br><br>
+Group_id:
+- -1: admin
+- 0: not a valid number
+- 1: group 1 (default)
+- 2: group 2
+
+<br><br>
+At this point you only set the codes or puzzels from within a sql editor (like phpmyadmin)
+
+
+## To-Do List
+- Easier way to set users groups
+- Easier way to add codes/puzzels
 
