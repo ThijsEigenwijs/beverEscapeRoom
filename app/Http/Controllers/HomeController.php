@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -29,19 +30,35 @@ class HomeController extends Controller
     public function codesPost(Request $request)
     {
 
+        $solved = [];
         $codes = \App\Codes::all();
 
         $full = $request->all();
 
-        foreach ($codes as $code){
-            if($code->code == $full[$code->id]){
-                $code->solved = 1;
+        foreach ($codes as $code) {
+
+            $user = Auth::user();
+
+            if ($user->group_id == 1) {
+                $solved = array_add($solved, $code->id, $code->solved_group1);
+            } elseif ($user->group_id == 2) {
+                $solved = array_add($solved, $code->id, $code->solved_group1);
+            }
+
+            if ($code->code == $full[$code->id]) {
+                if ($user->group_id == 1) {
+                    $code->solved_group1 = 1;
+                } elseif ($user->group_id == 2) {
+                    $code->solved_group2 = 1;
+                }
                 $code->save();
             }
 
         }
 
-        return view('codesPost', ['codes' => $codes]);
+
+
+        return view('codesPost', ['codes' => $codes, 'solved' => $solved]);
     }
 
     public function codes()
@@ -58,16 +75,16 @@ class HomeController extends Controller
         return view('hints', ['codes' => $codes]);
     }
 
-    public  function reset(){
-
-
+    public function reset()
+    {
         $codes = \App\Codes::all();
-
-        foreach ($codes as $code){
-                $code->solved = 0;
+        $user = Auth::user();
+        if ($user->group_id == -1) {
+            foreach ($codes as $code) {
+                $code->solved_group1 = 0;
+                $code->solved_group2 = 0;
                 $code->save();
-
-
+            }
         }
 
         return view('home');

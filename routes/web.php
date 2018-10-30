@@ -95,6 +95,9 @@ Route::get('/reset','HomeController@reset')->name('reset');
 
 Route::post('/codes','HomeController@codesPost')->name('codesPost');
 
+Route::get('/addPuzzels', function () {
+    return view('addPuzzels');
+})->name('addPuzzels');
 
 /* View Composer*/
 View::composer(['*'], function ($view) {

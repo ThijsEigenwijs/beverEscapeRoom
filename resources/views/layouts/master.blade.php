@@ -45,7 +45,7 @@
             <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
         </div>
         <!--logo start-->
-        <a href="index.html" class="logo logo-red"><b>SOB Bevers</b></a>
+        <a href="{{route('codes')}}" class="logo logo-red"><b>SOB Bevers</b></a>
         <!--logo end-->
         @if(Auth::user() != null)
             <div class="nav notify-row" id="top_menu">
@@ -101,8 +101,8 @@
             <div id="sidebar" class="nav-collapse ">
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu" id="nav-accordion">
-                    <p class="centered"><a href="profile.html"><img src="img/logo_bevers.png" class="img-circle"
-                                                                    width="80"></a>
+                    <p class="centered"><a href="{{route('codes')}}"><img src="img/logo_bevers.png" class="img-circle"
+                                                                          width="80"></a>
                     </p>
                     <h5 class="centered">{{ Auth::user()->name }}</h5>
                     <li>
@@ -125,6 +125,7 @@
                             <span>Hints</span>
                         </a>
                     </li>
+
                     <li>
                         <a data-toggle="modal" data-target="#about">
                             <i class="fas fa-paper-plane"></i>
@@ -132,6 +133,14 @@
                         </a>
                     </li>
 
+                    @if(Auth::user()->group_id == -1)
+                        <li>
+                            <a href="{{route('reset')}}">
+                                <i class="fas fa-redo"></i>
+                                <span>Reset the game!</span>
+                            </a>
+                        </li>
+                    @endif
 
                     {{-- The logout --}}
                     <li>
