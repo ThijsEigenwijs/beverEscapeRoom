@@ -138,21 +138,21 @@
 
                         <li>
                             <a href="{{route('addPuzzel')}}">
-                                <i class="fab fa-rebel"></i>
+                                <i class="far fa-plus-square"></i>
                                 <span>Add puzzels</span>
                             </a>
                         </li>
 
                         <li>
                             <a href="{{route('delPuzzel')}}">
-                                <i class="fab fa-rebel"></i>
+                                <i class="far fa-trash-alt"></i>
                                 <span>Delete puzzels</span>
                             </a>
                         </li>
 
                         <li>
                             <a data-toggle="modal" data-target="#reset">
-                                <i class="fab fa-rebel"></i>
+                                <i class="fas fa-redo-alt"></i>
                                 <span>Reset the game!</span>
                             </a>
                         </li>
