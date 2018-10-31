@@ -28,6 +28,14 @@ Now you are done.
 
 ` php artisan serve ` and open the project on the browser. 
 
+## New in this version!
+- Easy way to create new challenges
+
+## Features
+- 2 Groups
+- Admin account with overview
+- Easy way to create new challenges
+
 
 ## Default settings
 Admin account:<br>
@@ -43,8 +51,6 @@ Group_id:
 <br><br>
 At this point you only set the codes or puzzels from within a sql editor (like phpmyadmin)
 
-
 ## To-Do List
 - Easier way to set users groups
-- Easier way to add codes/puzzels
 

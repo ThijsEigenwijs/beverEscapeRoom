@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Codes;
 
 class HomeController extends Controller
 {
@@ -57,7 +58,6 @@ class HomeController extends Controller
         }
 
 
-
         return view('codesPost', ['codes' => $codes, 'solved' => $solved]);
     }
 
@@ -90,4 +90,41 @@ class HomeController extends Controller
         return view('home');
     }
 
+    public function addPuzzelPost(Request $request)
+    {
+        $full = $request->request;
+        $code = $full->get('code');
+        $hint = $full->get('hint');
+
+        $puzzel = new Codes;
+
+        $puzzel->code = $code;
+        $puzzel->hint = $hint;
+        $puzzel->updated_at = null;
+        $puzzel->created_at = null;
+        $puzzel->solved_group1 = 0;
+        $puzzel->solved_group2 = 0;
+        $puzzel->save();
+
+        return view('addPuzzel');
+
+    }
+
+    public function delPuzzel()
+    {
+        $codes = \App\Codes::all();
+        return view('delPuzzel',['codes' => $codes]);
+    }
+
+    public function delPuzzelPost(Request $request)
+    {
+        $full = $request->request;
+        $id = $full->get('id');
+
+        $puzzel = \App\Codes::where('id', $id)->first();
+        $puzzel->delete();
+
+        $codes = \App\Codes::all();
+        return view('delPuzzel',['codes' => $codes]);
+    }
 }

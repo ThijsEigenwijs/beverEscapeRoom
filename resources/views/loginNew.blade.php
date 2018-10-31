@@ -1,15 +1,12 @@
 @extends('layouts.master')
 
 @section('content')
-    <section class="wrapper">
-        <br>
-
+    <section class="">
         <div class="container">
             <div class="row">
-                <div class="">
 
 
-                    <div class="col-md-10 col-md-offset-1">
+                <div class="col-md-10 col-md-offset-1">
                     <form class="form-horizontal form-login" method="POST" action="{{ route('login') }}">
                         <h2 class="form-login-heading">Sign in</h2>
                         {{ csrf_field() }}
@@ -85,8 +82,8 @@
 
 
                     <br>
-                    </div>
                 </div>
+
             </div>
         </div>
     </section>

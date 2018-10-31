@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
+
     <meta name="author" content="Dashboard">
-    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <meta name="keyword" content="Scouting Oud Best Bevers Escape Room">
     <title>The Bever Escape Room</title>
 
     <!-- Favicons -->
@@ -45,7 +46,7 @@
             <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
         </div>
         <!--logo start-->
-        <a href="{{route('codes')}}" class="logo logo-red"><b>SOB Bevers</b></a>
+        <a href="{{route('codes')}}" class="logo logo-red"><b>Bever Escape Room</b></a>
         <!--logo end-->
         @if(Auth::user() != null)
             <div class="nav notify-row" id="top_menu">
@@ -68,7 +69,7 @@
                             @foreach(\App\Codes::all() as $code)
                                 @if($code->solved == false)
                                     <li>
-                                        <a href="index.html#">
+                                        <a href="{{route('codes')}}">
                                             <div class="task-info">
                                                 <div class="desc">Puzzel {{$code->id}}</div>
                                             </div>
@@ -134,9 +135,24 @@
                     </li>
 
                     @if(Auth::user()->group_id == -1)
+
                         <li>
-                            <a href="{{route('reset')}}">
-                                <i class="fas fa-redo"></i>
+                            <a href="{{route('addPuzzel')}}">
+                                <i class="fab fa-rebel"></i>
+                                <span>Add puzzels</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{route('delPuzzel')}}">
+                                <i class="fab fa-rebel"></i>
+                                <span>Delete puzzels</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a data-toggle="modal" data-target="#reset">
+                                <i class="fab fa-rebel"></i>
                                 <span>Reset the game!</span>
                             </a>
                         </li>
@@ -163,16 +179,9 @@
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu" id="nav-accordion">
                     <li class="mt">
-                        <a href="{{ route('login') }}">
-                            <i class="fas fa-sign-in-alt"></i>
-                            <span>Login</span>
-                        </a>
-                    </li>
-
-                    <li class="mt">
                         <a href="{{ route('loginNew') }}">
                             <i class="fas fa-sign-in-alt"></i>
-                            <span>Login (new variant)</span>
+                            <span>Login</span>
                         </a>
                     </li>
 
@@ -214,6 +223,30 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Oké</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="reset" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                        </button>
+                        <h4 id="myModalLabel">Reset</h4>
+                    </div>
+                    <div class="modal-body">
+                        Weet je zeker dat je het spel wil resetten?
+                    </div>
+                    <div class="modal-footer">
+                        <form method="get" action="/reset">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Nee</button>
+
+                            <button class="btn btn-danger" type="submit">Ja</button>
+                        </form>
                     </div>
                 </div>
             </div>

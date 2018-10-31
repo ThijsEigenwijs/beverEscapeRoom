@@ -17,8 +17,8 @@ class CreateCodesTable extends Migration
             $table->increments('id');
             $table->string('code');
             $table->string('hint');
-            $table->boolean('solved_group1');
-            $table->boolean('solved_group2');
+            $table->boolean('solved_group1')->default(0);
+            $table->boolean('solved_group2')->default(0);
             $table->timestamps();
         });
     }

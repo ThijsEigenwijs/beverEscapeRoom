@@ -1,5 +1,6 @@
 <?php
 
+use App\Codes;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,9 +96,14 @@ Route::get('/reset','HomeController@reset')->name('reset');
 
 Route::post('/codes','HomeController@codesPost')->name('codesPost');
 
-Route::get('/addPuzzels', function () {
-    return view('addPuzzels');
-})->name('addPuzzels');
+Route::get('/addPuzzel', function () {
+    return view('addPuzzel');
+})->name('addPuzzel');
+
+Route::get('/delPuzzel','HomeController@delPuzzel')->name('delPuzzel');
+
+Route::post('/addPuzzel','HomeController@addPuzzelPost')->name('addPuzzelPost');
+Route::post('/delPuzzel','HomeController@delPuzzelPost')->name('delPuzzelPost');
 
 /* View Composer*/
 View::composer(['*'], function ($view) {
